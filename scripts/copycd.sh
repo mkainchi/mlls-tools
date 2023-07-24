@@ -5,13 +5,7 @@ clean=$2
 
 cddev=$(mount |grep -i $cdname |cut -d " " -f 1)
 
-#if [[ $cddev1 == *"/dev/sr"* ]] && ![ "-" ]; then
-#cddev=$(./lsscsi -g |grep $cddev1 | tail -c -10)
-#else
-#cddev=$cddev1
-#fi
-
-echo "les variables --> cdname:$cdname cddev:$cddev"
+echo "Variables : cdname:$cdname cddev:$cddev"
 
 udisksctl unmount -b $cddev
 
@@ -23,7 +17,6 @@ echo "./cdrdao read-cd --read-raw --datafile $cdname.bin --driver generic-mmc:0x
 ./toc2cue $cdname.toc $cdname.cue
 
 if [ -z "$clean" ]; then
-echo "la variable clean est vide"
 rm -f -r *.toc toc2cue cdrdao bchunk bin2iso 7z about_cdrtools.txt
 fi
 
